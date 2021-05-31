@@ -29,7 +29,7 @@ const chainIds = {
 const MNEMONIC = process.env.MNEMONIC || '';
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
-const ALCHEMY_KEY = process.env.ALCHEMY_KEY || '';
+// const ALCHEMY_KEY = process.env.ALCHEMY_KEY || '';
 
 /* This is a sample Hardhat task. To learn how to create your own go to
   https://hardhat.org/guides/create-task.html */

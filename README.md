@@ -1,4 +1,4 @@
-# Solidity Template
+# [Solidity](https://reference.auditless.com/cheatsheet/) Template
 
 ![Solidity Hardhat Typescript Waffle Graphic](./.readme.png)
 
@@ -127,13 +127,13 @@ npx prettier --write 'contracts/**/*.sol'
 ```
 
 ### Solidity Resources
-
-[Style Guide](https://docs.soliditylang.org/en/develop/style-guide.html)
+* [Cheatsheet](./solidity-cheatsheet.md)
+* [Style Guide](https://docs.soliditylang.org/en/develop/style-guide.html)
 
 ### Solhint
 
-[Rules](https://tokenhouse.github.io/solhint/rules.html)
-[Style Guide](https://protofire.github.io/solhint/docs/rules.html#style-guide-rules)
+* [Rules](https://tokenhouse.github.io/solhint/rules.html)
+* [Style Guide](https://protofire.github.io/solhint/docs/rules.html#style-guide-rules)
 
 To disable all validations in the line following a comment:
 
@@ -155,6 +155,16 @@ Group of lines:
   /* solhint-enable */
 ```
 
+#### Additional Solidity Resources
+* [Blog](https://blog.soliditylang.org/)
+* [Cheatsheet](https://reference.auditless.com/cheatsheet/)
+* [Voting Example](https://ethereum.org/en/developers/docs/smart-contracts/languages/)
+* [Examples](https://solidity-by-example.org/)
+* [Ethereum Docs](https://ethereum.org/en/developers/docs/)
+* [App Stack Example](https://github.com/austintgriffith/scaffold-eth#-ui-library)
+* [Awesome](https://github.com/bkrem/awesome-solidity/blob/master/README.md)
+* [hardhat-docgen](https://github.com/ItsNickBarry/hardhat-docgen)
+
 #### Todo
 * @nomiclabs/hardhat-solhint
 * hardhat-deploy-ethers
@@ -162,3 +172,8 @@ Group of lines:
 * @openzeppelin/hardhat-upgrades
 * hardhat-watcher
 * buidler-contract-sizer/ hardhat-contract-sizer
+
+### Branding
+<div style='text-align: center'>
+<img src='https://raw.githubusercontent.com/ethereum/solidity/develop/docs/logo.svg' width='100px'>
+</div>
