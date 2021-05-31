@@ -26,19 +26,51 @@ const chainIds = {
   ropsten: 3,
 };
 
+const VERBOSE = false;
 const MNEMONIC = process.env.MNEMONIC || '';
+const ETH_PRIVATE_KEY = process.env.ETH_PRIVATE_KEY || '';
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
-// const ALCHEMY_KEY = process.env.ALCHEMY_KEY || '';
+const ALCHEMY_API_URL = process.env.ALCHEMY_API_URL || '';
 
-/* This is a sample Hardhat task. To learn how to create your own go to
-  https://hardhat.org/guides/create-task.html */
-task('accounts', 'Prints the list of accounts =>', async (args, hre) => {
+const traverseKeys = (obj: any, results = []) => {
+  const r: any = results;
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+    if (typeof value !== 'object' || typeof value !== 'function') {
+      console.log(value);
+      r.push(value);
+    } else if (typeof value === 'object') {
+      traverseKeys(value, r);
+    }
+  });
+  return r;
+};
+
+task('accounts', 'Prints the list of accounts', async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
   for (const account of accounts) {
     console.log(await account.address);
   }
 });
+
+task('networks', 'Prints network settings', async (args, hre) => {
+  console.log(`Network settings => `);
+
+  console.log(`Hardhat Runtime Environment => `)
+  console.log(Object.keys(hre));
+
+  VERBOSE && console.log(`Full HRE => `)
+  VERBOSE && console.log(traverseKeys(hre));
+
+  VERBOSE && console.log(Object.keys(hre['config']['networks']['alchemy']));
+
+  console.log(`Alchemy => `)
+  console.log(hre['config']['networks']['alchemy']);
+
+  console.log(`Ropsten => `)
+  console.log(hre['config']['networks']['ropsten']);
+})
 
 const createTestnetConfig = (
   network: keyof typeof chainIds,
@@ -54,7 +86,7 @@ const createTestnetConfig = (
     chainId: chainIds[network],
     url,
   };
-}
+};
 
 /* You need to export an object to set up your config
   Go to https://hardhat.org/config/ to learn more */
@@ -71,6 +103,10 @@ const config: HardhatUserConfig = {
     kovan: createTestnetConfig('kovan'),
     rinkeby: createTestnetConfig('rinkeby'),
     ropsten: createTestnetConfig('ropsten'),
+    alchemy: {
+      url: ALCHEMY_API_URL,
+      accounts: [`0x${ETH_PRIVATE_KEY}`]
+    }
   },
   solidity: {
     compilers: [

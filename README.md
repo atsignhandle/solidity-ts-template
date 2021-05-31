@@ -23,6 +23,10 @@ Set up your .env with:
 cp -v .env.example .env
 ```
 
+_Infura or Alchemy is sufficient for testnet access._
+
+* [ALCHEMY_API_URL](https://dashboard.alchemyapi.io/)
+* [ETH_PRIVATE_KEY](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
 * [MNEMONIC](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-Reveal-Your-Seed-Phrase-Secret-Recovery-Phrase)
 * [INFURA_API_KEY](https://infura.io/)
 * [ETHERSCAN_API_KEY](https://etherscan.io/)
@@ -101,15 +105,94 @@ yarn test
 ### Deploy contract to network 
 _(requires Mnemonic and Infura API key)_
 
-```
+```sh
 npx hardhat run --network rinkeby ./scripts/deploy.ts
 ```
+
+### Or Deploy contract to Alchemy network
+_(requires Alchemy API URL and Ethereum private key)_ The API URL is for the Ropsten network.
+
+```sh
+npx hardhat run scripts/deploy.ts --network alchemy
+```
+
+### 
 
 ### Validate a contract with Etherscan 
 _(requires Etherscan API key)_
 
-```
+```sh
 npx hardhat verify --network <network> <DEPLOYED_CONTRACT_ADDRESS> "Constructor argument 1"
+```
+
+For example:
+
+```sh
+npx hardhat verify --network ropsten 0x4ed4DDd7981e347b673f697DC821965A3EB64b9c
+```
+
+Returns:
+
+```sh
+Creating Typechain artifacts in directory typechain for target ethers-v5
+Successfully generated Typechain artifacts!
+Compiling 1 file with 0.6.12
+Successfully submitted source code for contract
+contracts/TestToken.sol:TestToken at 0x4ed4DDd7981e347b673f697DC821965A3EB64b9c
+for verification on Etherscan. Waiting for verification result...
+
+Successfully verified contract TestToken on Etherscan.
+https://ropsten.etherscan.io/address/0x4ed4DDd7981e347b673f697DC821965A3EB64b9c#code
+```
+
+[0x4ed4DDd7981e347b673f697DC821965A3EB64b9c](https://ropsten.etherscan.io/address/0x4ed4DDd7981e347b673f697DC821965A3EB64b9c#code)
+
+### Network
+To verify your various test, hardhat, and Alchemy networks are configured properly, `npx hardhat networks` will return such details. 
+
+```sh
+Network settings =>
+Hardhat Runtime Environment =>
+[
+  'config',
+  'hardhatArguments',
+  'tasks',
+  'run',
+  'artifacts',
+  'network',
+  '_extenders',
+  'ethers',
+  'waffle',
+  'upgrades'
+]
+Alchemy =>
+{
+  accounts: [
+    '0xREDACTED_PRIVATE_KEY'
+  ],
+  gas: 'auto',
+  gasPrice: 'auto',
+  gasMultiplier: 1,
+  httpHeaders: {},
+  timeout: 20000,
+  url: 'https://eth-ropsten.alchemyapi.io/v2/REDACTED_ALCHEMY_API_KEY'
+}
+Ropsten =>
+{
+  accounts: {
+    initialIndex: 0,
+    count: 10,
+    path: "m/44'/60'/0'/0",
+    mnemonic: 'REDACTED_MNEMONIC_WORDS'
+  },
+  gas: 'auto',
+  gasPrice: 'auto',
+  gasMultiplier: 1,
+  httpHeaders: {},
+  timeout: 20000,
+  chainId: 3,
+  url: 'https://ropsten.infura.io/v3/REDACTED_INFURA_API_KEY'
+}
 ```
 
 ### Added plugins

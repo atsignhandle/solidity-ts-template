@@ -10,8 +10,7 @@ async function main(): Promise<void> {
   /* Hardhat always runs the compile task when running scripts through it.
   If this runs in a standalone fashion you may want to call compile manually
   to make sure everything is compiled
-  await run("compile");
-  We get the contract to deploy */
+  await run("compile"); We get the contract to deploy */  
   const TestTokenFactory: ContractFactory = await ethers.getContractFactory(
     'TestToken',
   );
