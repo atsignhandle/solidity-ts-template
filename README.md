@@ -1,4 +1,4 @@
-# [Solidity](https://reference.auditless.com/cheatsheet/) Template
+# [Solidity](https://github.com/pleasemarkdarkly/solidity-ts-template/blob/main/solidity-cheatsheet.md) Template
 
 ![Solidity Hardhat Typescript Waffle Graphic](./.readme.png)
 
@@ -17,13 +17,13 @@ This is a GitHub template, which means you can reuse it as many times as you wan
 
 ### Prerequisites
 
-Set up your .env with:
+Set up your .env with the respective values:
 
 ```sh
 cp -v .env.example .env
 ```
 
-_Infura or Alchemy is sufficient for testnet access._
+_Alchemy requires the API URL and ETH Private Key, Infura requires the API KEY and Mnemonic_
 
 * [ALCHEMY_API_URL](https://dashboard.alchemyapi.io/)
 * [ETH_PRIVATE_KEY](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
@@ -209,10 +209,6 @@ Ropsten =>
 npx prettier --write 'contracts/**/*.sol'
 ```
 
-### Solidity Resources
-* [Cheatsheet](./solidity-cheatsheet.md)
-* [Style Guide](https://docs.soliditylang.org/en/develop/style-guide.html)
-
 ### Solhint
 
 * [Rules](https://tokenhouse.github.io/solhint/rules.html)
@@ -222,25 +218,40 @@ To disable all validations in the line following a comment:
 
 ```sol
  // solhint-disable-next-line
+ bytes32 public constant MINTER_PANTS = keccak256("MINTER_PANTS");
 ```
 
 Current line:
 
 ```sol
-  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
+bytes32 public constant MINTER_PANTS = keccak256("MINTER_PANTS"); // solhint-disable-line
 ```
 
-Group of lines:
+Block of code:
 
 ```sol
  /* solhint-disable */
- ...
+  contract Forwarder { 
+    address public destinationAddress;
+
+    function Forwarder() public {
+      destinationAddress = msg.sender;
+    }
+
+    function() payable public {
+          destinationAddress.transfer(msg.value);
+    }
+
+    function flush() public {
+      destinationAddress.transfer(this.balance);
+    }
+  }
   /* solhint-enable */
 ```
 
 #### Additional Solidity Resources
 * [Blog](https://blog.soliditylang.org/)
-* [Cheatsheet](https://reference.auditless.com/cheatsheet/)
+* [Cheatsheet](https://github.com/pleasemarkdarkly/solidity-ts-template/blob/main/solidity-cheatsheet.md)
 * [Voting Example](https://ethereum.org/en/developers/docs/smart-contracts/languages/)
 * [Examples](https://solidity-by-example.org/)
 * [Ethereum Docs](https://ethereum.org/en/developers/docs/)
